@@ -15,13 +15,10 @@ class GamesList extends Component {
   }
 
   componentDidMount() {
-    let x = 1;
     axios.get(`http://localhost:8000/socname/`).then(response => {
       console.log(response.data);
-      console.log("items", response.data.results[x].socapis);
       this.setState({
-        socname: response.data.results,
-        details: response.data.results[x].socapis
+        socname: response.data.results
       });
     });
     axios.get(`http://localhost:8000/socapi/`).then(response => {
@@ -53,13 +50,18 @@ class GamesList extends Component {
                   <th>Outcome</th>
                 </tr>
               </thead>
-              {socname.socapis[0].map}
-              <tbody key={k.id}>
-                <tr>
-                  <td></td>
-                  <td>{k.socapis[0].home_team}</td>
-                </tr>
-              </tbody>
+              {socapi.map((soc, i) => (
+                <tbody key={soc.id}>
+                  <tr>
+                    <td></td>
+                    <td>{soc.home_team}</td>
+                    <td>{soc.away_team}</td>
+                    <td>{soc.prediction}</td>
+                    <td>{soc.country}</td>
+                    <td>{soc.outcome}</td>
+                  </tr>
+                </tbody>
+              ))}
             </Table>
           ))}
         </ul>
