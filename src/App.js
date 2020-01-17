@@ -33,7 +33,7 @@ class GamesList extends Component {
   }
 
   render() {
-    const { socapi } = this.state;
+    //const { socapi } = this.state;
     const { socname } = this.state;
 
     return (
@@ -53,13 +53,18 @@ class GamesList extends Component {
                   <th>Outcome</th>
                 </tr>
               </thead>
-              {socname.socapis[0].map}
-              <tbody key={k.id}>
-                <tr>
-                  <td></td>
-                  <td>{k.socapis[0].home_team}</td>
-                </tr>
-              </tbody>
+              {k.socapis.map(sub => (
+                <tbody key={k.id}>
+                  <tr>
+                    <td></td>
+                    <td>{sub.home_team}</td>
+                    <td>{sub.away_team}</td>
+                    <td>{sub.prediction}</td>
+                    <td>{sub.country}</td>
+                    <td>{sub.outcome}</td>
+                  </tr>
+                </tbody>
+              ))}
             </Table>
           ))}
         </ul>
