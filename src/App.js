@@ -35,6 +35,7 @@ class GamesList extends Component {
   render() {
     //const { socapi } = this.state;
     const { socname } = this.state;
+    // const won =
 
     return (
       <Fragment>
@@ -53,18 +54,52 @@ class GamesList extends Component {
                   <th>Outcome</th>
                 </tr>
               </thead>
-              {k.socapis.map(sub => (
-                <tbody key={k.id}>
-                  <tr>
-                    <td></td>
-                    <td>{sub.home_team}</td>
-                    <td>{sub.away_team}</td>
-                    <td>{sub.prediction}</td>
-                    <td>{sub.country}</td>
-                    <td>{sub.outcome}</td>
-                  </tr>
-                </tbody>
-              ))}
+              {k.socapis.map(sub => {
+                if (sub.outcome === sub.prediction) {
+                  return (
+                    <tbody key={k.id}>
+                      <tr>
+                        <td></td>
+                        <td>{sub.home_team}</td>
+                        <td>{sub.away_team}</td>
+                        <td>{sub.country}</td>
+                        <td>{sub.prediction}</td>
+                        <td class="p-2 mb-1 bg-success text-dark">
+                          {sub.outcome}
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                } else if (sub.outcome === null) {
+                  return (
+                    <tbody key={k.id}>
+                      <tr>
+                        <td></td>
+                        <td>{sub.home_team}</td>
+                        <td>{sub.away_team}</td>
+                        <td>{sub.country}</td>
+                        <td>{sub.prediction}</td>
+                        <td class="p-2 mb-1 bg-danger text-dark">Running...</td>
+                      </tr>
+                    </tbody>
+                  );
+                } else {
+                  return (
+                    <tbody key={k.id}>
+                      <tr>
+                        <td></td>
+                        <td>{sub.home_team}</td>
+                        <td>{sub.away_team}</td>
+                        <td>{sub.country}</td>
+                        <td>{sub.prediction}</td>
+                        <td class="p-2 mb-1 bg-warning text-dark">
+                          {sub.outcome}
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                }
+              })}
             </Table>
           ))}
         </ul>
